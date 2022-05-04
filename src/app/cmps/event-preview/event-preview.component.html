@@ -1,9 +1,13 @@
-<section class="event-preview">
-<div>Pual Meccarteni</div>
-<img src="https://s1.ticketm.net/dam/a/ac1/3bc6b045-e04f-4520-b1de-b552e2b1cac1_1645021_CUSTOM.jpg" alt=""> 
-<a href="https://s1.ticketm.net/dam/a/ac1/3bc6b045-e04f-4520-b1de-b552e2b1cac1_1645021_CUSTOM.jpg">Buy Tickets now!</a>
-<div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Modi, commodi impedit neque dolor rerum quo.</div>
-<div>22.05.2022</div>
+<section class="event-preview flex column">
+  <img [src]="event.images[0].url" alt=""> 
+  <div class="event flex column">
+     <h1 class="text-center">{{event.name}}</h1>
+     <section class="event-info">
+       <a [href]="event.url">Buy Tickets now!</a>
+       <div>{{event.classifications[0].segment.name}}</div>
+       <div>{{event.dates.start.localDate}}</div>
+    </section>
+  </div>
 <!-- <div>{{event.name}}</div>
 <img [src]="event.images[0].url" alt=""> 
 <a [href]="event.url">Buy Tickets now!</a>
