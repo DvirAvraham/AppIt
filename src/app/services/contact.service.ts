@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import {Contact} from '../models/contact.model'
-
+import { Contact } from '../models/contact.model';
+import { StorageService } from '../services/storage.service';
+import { UtilService } from '../services/util.service';
 
 const CONTACTS = [
   {
@@ -141,18 +142,37 @@ const CONTACTS = [
 ];
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContactService {
+  constructor(
+    private storageService: StorageService,
+    private utilService: UtilService
+  ) {}
 
-  constructor() { }
+  CONTACT_KEY: string = 'contact_db';
 
   private _contactsDb = CONTACTS;
 
   private _contacts$ = new BehaviorSubject<Contact[]>([]);
   public contacts$ = this._contacts$.asObservable();
 
-  public loadContacts(filterBy=null):void{
-  this._contacts$.next(this._contactsDb)
+  public loadContacts(filterBy = null): void {
+    let contacts = this.storageService.loadFromStorage(this.CONTACT_KEY);
+    if (!contacts?.length || !contacts) {
+      contacts = this._setContactsImg(this._contactsDb);
+    }
+    this._contacts$.next(contacts);
+    this.storageService.saveToStorage(this.CONTACT_KEY, contacts);
+  }
+
+  _setContactsImg(contacts: Contact[]) {
+    return contacts.map((contact) => {
+      const gender = Math.random() > 0.5 ? 'women' : 'men';
+      const num = this.utilService.getRandomInt(1, 50);
+      const url = `https://randomuser.me/api/portraits/${gender}/${num}.jpg`;
+      contact.img = url;
+      return contact;
+    });
   }
 }

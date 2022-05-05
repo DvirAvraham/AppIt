@@ -1,13 +1,16 @@
 <section class="event-preview flex column">
+  
   <img [src]="event.images[0].url" alt=""> 
-  <div class="event flex column">
+  <!-- <div class="event flex column">
      <h1 class="text-center">{{event.name}}</h1>
-     <section class="event-info">
-       <a [routerLink]="['event', event.id]">Details</a>
-       <div>{{event.classifications[0].segment.name}}</div>
-       <div>{{event.dates.start.localDate}}</div>
-    </section>
-  </div>
+     <section class="event-info"> -->
+       <a class="details-btn"[routerLink]="['event', event.id]">Details</a>
+       <!-- <div>{{event.classifications[0].segment.name}}</div>
+      </section>
+    </div> -->
+    <div class="date">{{event.dates.start.localDate}}</div>
+    <div class="img-overlay">
+    </div>
 
   
 

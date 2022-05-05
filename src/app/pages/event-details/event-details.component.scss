@@ -5,6 +5,7 @@
   position: fixed;
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(4px);
+  z-index: 15;
 }
 
 .event-modal {
@@ -21,6 +22,7 @@
   border-radius: 5px;
   background-repeat: round;
   text-shadow: -6px 1px 5px #000000;
+  z-index: 15;
   h1 {
     font-size: 2rem;
   }

@@ -16,6 +16,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #181616;
 }
 
 .cards-grid {
@@ -58,6 +59,13 @@ body {
 }
 
 img {
-  width: 270px;
-  height: 195px;
+  width: inherit;
+  height: inherit;
+  min-height: 211px;
+  border-radius: 5px;
+}
+
+.main-layout {
+  max-width: 1450px;
+  margin: 0 auto;
 }
