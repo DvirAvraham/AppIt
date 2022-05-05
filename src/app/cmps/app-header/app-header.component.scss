@@ -1,0 +1,24 @@
+.main-header {
+  height: 250px;
+  text-align: center;
+  & .logo {
+    font-size: 4.9rem;
+    color: #d9fdd3;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    & img {
+      position: absolute;
+      top: 55px;
+      left: 57%;
+      min-height: 73px !important;
+    }
+  }
+
+  & nav {
+    a {
+      color: #fff;
+      font-size: 1.4rem;
+      text-decoration: unset;
+    }
+  }
+}

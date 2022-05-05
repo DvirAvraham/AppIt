@@ -12,6 +12,12 @@
     position: absolute;
     right: 0;
     bottom: 0;
+    & img {
+      width: inherit;
+      height: inherit;
+      min-height: 211px;
+      border-radius: 5px;
+    }
   }
 
   .event {
@@ -34,10 +40,17 @@
   font-size: 1.6em;
   color: #000;
   text-decoration: none;
-  background-color: #d9fdd3;
+  background: rgb(239, 255, 236);
+  background: linear-gradient(
+    47deg,
+    rgba(239, 255, 236, 1) 21%,
+    rgba(217, 253, 211, 1) 51%,
+    rgba(196, 231, 190, 1) 76%
+  );
   padding: 19px;
   border-radius: 5px;
-  font-variant-caps: petite-caps;
+  font-variant-caps: all-petite-caps;
+  font-weight: 500;
 }
 
 .event-preview .img-overlay {
