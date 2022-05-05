@@ -2,6 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './cmps/app-root/app.component';
@@ -13,6 +14,7 @@ import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview.
 import { EventListComponent } from './cmps/event-list/event-list.component';
 import { EventPreviewComponent } from './cmps/event-preview/event-preview.component';
 import { EventDetailsComponent } from './pages/event-details/event-details.component';
+import { FilterComponent } from './cmps/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -24,14 +26,11 @@ import { EventDetailsComponent } from './pages/event-details/event-details.compo
     ContactPreviewComponent,
     EventListComponent,
     EventPreviewComponent,
-    EventDetailsComponent
+    EventDetailsComponent,
+    FilterComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

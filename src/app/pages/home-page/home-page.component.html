@@ -1,4 +1,5 @@
 <section class="home-page main-layout">
+    <filter (filter)="loadEvents($event)"></filter>
  <router-outlet></router-outlet>
  <event-list [events] = "events$" ></event-list>
 </section>
