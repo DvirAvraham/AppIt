@@ -3,14 +3,12 @@
   <div class="event flex column">
      <h1 class="text-center">{{event.name}}</h1>
      <section class="event-info">
-       <a [href]="event.url">Buy Tickets now!</a>
+       <a [routerLink]="['event', event.id]">Details</a>
        <div>{{event.classifications[0].segment.name}}</div>
        <div>{{event.dates.start.localDate}}</div>
     </section>
   </div>
-<!-- <div>{{event.name}}</div>
-<img [src]="event.images[0].url" alt=""> 
-<a [href]="event.url">Buy Tickets now!</a>
-<div>{{event.info}}</div>
-<div>{{event.dates.start.localDate}}</div> -->
+
+  
+
 </section>

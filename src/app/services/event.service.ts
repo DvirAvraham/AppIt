@@ -37,6 +37,10 @@ export class EventService {
   private _queryEvents(){
     return this.http.get("https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=C0BRd57nGzEyWfVUxb5goo7XKwkGdZFA")
   }
+
+  public getEventById(id:string){
+    return this._events$.value.find((event:any)=> event.id === id)
+  }
 }
 
 

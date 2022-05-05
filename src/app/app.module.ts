@@ -12,6 +12,7 @@ import { ContactListComponent } from './cmps/contact-list/contact-list.component
 import { ContactPreviewComponent } from './cmps/contact-preview/contact-preview.component';
 import { EventListComponent } from './cmps/event-list/event-list.component';
 import { EventPreviewComponent } from './cmps/event-preview/event-preview.component';
+import { EventDetailsComponent } from './pages/event-details/event-details.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { EventPreviewComponent } from './cmps/event-preview/event-preview.compon
     ContactListComponent,
     ContactPreviewComponent,
     EventListComponent,
-    EventPreviewComponent
+    EventPreviewComponent,
+    EventDetailsComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,8 @@
+<section class="details-bg" (click)="back()"></section>
+<!-- <section [ngStyle]="{'background-image': url()} "> -->
+<section  class="event-modal" [ngStyle]="{'background-image': 'url(' + event.images[0].url + ')'}">
+  <h1>{{event.name}}</h1>
+         <a [href]="event.url">Get Tickets now!</a>
+
+</section>
+
