@@ -5,23 +5,27 @@ import { ContactPageComponent } from './pages/contact-page/contact-page.componen
 import { EventDetailsComponent } from './pages/event-details/event-details.component';
 import { CotactDetailsComponent } from './pages/cotact-details/cotact-details.component';
 import { EditPageComponent } from './pages/edit-page/edit-page.component';
+import { ContactResolverService } from './services/contact-resolver.service';
 
 const routes: Routes = [
-  {
-    path: 'contact/:id',
-    component: CotactDetailsComponent,
-  },
   {
     path: 'contact',
     component: ContactPageComponent,
     children: [
       {
-        path: 'edit',
-        component: EditPageComponent,
-      },
-      {
         path: 'edit/:id',
         component: EditPageComponent,
+        resolve: { contact: ContactResolverService },
+      },
+      {
+        path: 'edit',
+        component: EditPageComponent,
+        resolve: { contact: ContactResolverService },
+      },
+      {
+        path: 'contact/:id',
+        component: CotactDetailsComponent,
+        resolve: { contact: ContactResolverService },
       },
     ],
   },
@@ -32,6 +36,7 @@ const routes: Routes = [
       {
         path: 'event/:id',
         component: EventDetailsComponent,
+        resolve: { contact: ContactResolverService },
       },
     ],
   },

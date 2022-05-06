@@ -1,5 +1,6 @@
 <router-outlet></router-outlet>
 <filter [isContactPage]="true" (filter)="loadContacts($event)" ></filter>
 <contact-list (remove)="removeContact($event)" class="contact-page main-layout"[contacts]="contacts"></contact-list>
+<a class="add"[routerLink]="['edit']">Create new contact</a>
 
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, of, Observable } from 'rxjs';
 import { Contact } from '../models/contact.model';
 import { StorageService } from '../services/storage.service';
 import { UtilService } from '../services/util.service';
@@ -159,13 +159,15 @@ export class ContactService {
 
   public loadContacts(filter = ''): void {
     let contacts = this.storageService.loadFromStorage(this.CONTACT_KEY);
-    this._contactsDb = contacts; // For keeping the CRUD up to date.
     let filterdContacts; // For keeping the storage whole.
     if (!contacts || !contacts?.length) {
-      contacts = this._setContactsImg(this._contactsDb);
+      contacts = this._contactsDb.map((contact: Contact) =>
+        this._setContactImg(contact)
+      );
       this._contactsDb = contacts;
     }
     filterdContacts = contacts;
+    this._contactsDb = contacts; // For keeping the CRUD up to date.
     if (filter) {
       filterdContacts = this.utilService.filter(contacts, filter);
     }
@@ -173,10 +175,22 @@ export class ContactService {
     this._contacts$.next(filterdContacts);
   }
 
-  public getContactById(id: string): Contact | undefined {
-    return this._contacts$.value.find((contact: Contact) => contact._id === id);
+  public getEmptyContact() {
+    return {
+      name: '',
+      email: '',
+      phone: '',
+      img: '',
+    };
   }
 
+  // public getContactById(id: string): Contact | undefined {
+  //   return this._contacts$.value.find((contact: Contact) => contact._id === id);
+  // }
+  public getContactById(id: string) {
+    const contact = this._contactsDb.find((contact) => contact._id === id);
+    return of(contact);
+  }
   public removeContact(id: string) {
     const contacts = this._contacts$.value.filter(
       (contact: Contact) => contact._id !== id
@@ -200,27 +214,36 @@ export class ContactService {
   }
 
   private _addContact(contact: Contact) {
-    const newContact = new Contact(
+    let newContact = new Contact(
       contact._id,
       contact.name,
       contact.email,
       contact.phone
     );
-    contact._id = this.utilService.makeId();
-    contact = this._setContactsImg([contact]);
-    this._contactsDb.push(newContact);
+    newContact._id = this.utilService.makeId();
+    newContact = this._setContactImg(newContact);
+    this._contactsDb.unshift(newContact);
     this._contacts$.next(this._contactsDb);
     this.storageService.saveToStorage(this.CONTACT_KEY, this._contactsDb);
   }
 
-  _setContactsImg(contacts: Contact[] | any) {
-    //Any is assigned because setting img on _addContact ** fixit **
-    return contacts.map((contact: Contact) => {
-      const gender = Math.random() > 0.5 ? 'women' : 'men';
-      const num = this.utilService.getRandomInt(1, 50);
-      const url = `https://randomuser.me/api/portraits/${gender}/${num}.jpg`;
-      contact.img = url;
-      return contact;
-    });
+  private _setContactImg(contact: Contact) {
+    const gender = Math.random() > 0.5 ? 'women' : 'men';
+    const num = this.utilService.getRandomInt(1, 50);
+    const url = `https://randomuser.me/api/portraits/${gender}/${num}.jpg`;
+    contact.img = url;
+    return contact;
   }
 }
+
+// _setContactsImg(contacts: Contact[] | any) {
+//   //Any is assigned because setting img on _addContact ** fixit **
+//   return contacts.map((contact: Contact) => {
+//     const gender = Math.random() > 0.5 ? 'women' : 'men';
+//     const num = this.utilService.getRandomInt(1, 50);
+//     const url = `https://randomuser.me/api/portraits/${gender}/${num}.jpg`;
+//     contact.img = url;
+//     return contact;
+//   });
+// }
+// }
