@@ -16,6 +16,10 @@ const routes: Routes = [
     component: ContactPageComponent,
     children: [
       {
+        path: 'edit',
+        component: EditPageComponent,
+      },
+      {
         path: 'edit/:id',
         component: EditPageComponent,
       },

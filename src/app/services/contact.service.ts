@@ -159,9 +159,11 @@ export class ContactService {
 
   public loadContacts(filter = ''): void {
     let contacts = this.storageService.loadFromStorage(this.CONTACT_KEY);
-    let filterdContacts;
-    if (!contacts?.length || !contacts) {
+    this._contactsDb = contacts; // For keeping the CRUD up to date.
+    let filterdContacts; // For keeping the storage whole.
+    if (!contacts || !contacts?.length) {
       contacts = this._setContactsImg(this._contactsDb);
+      this._contactsDb = contacts;
     }
     filterdContacts = contacts;
     if (filter) {
@@ -169,6 +171,10 @@ export class ContactService {
     }
     this.storageService.saveToStorage(this.CONTACT_KEY, contacts);
     this._contacts$.next(filterdContacts);
+  }
+
+  public getContactById(id: string): Contact | undefined {
+    return this._contacts$.value.find((contact: Contact) => contact._id === id);
   }
 
   public removeContact(id: string) {
@@ -179,8 +185,37 @@ export class ContactService {
     this._contacts$.next(contacts);
   }
 
-  _setContactsImg(contacts: Contact[]) {
-    return contacts.map((contact) => {
+  public saveContact(contact: Contact) {
+    return contact._id
+      ? this._updateContact(contact)
+      : this._addContact(contact);
+  }
+
+  private _updateContact(contact: Contact) {
+    this._contactsDb = this._contactsDb.map((c) =>
+      contact._id === c._id ? contact : c
+    );
+    this._contacts$.next(this._contactsDb);
+    this.storageService.saveToStorage(this.CONTACT_KEY, this._contactsDb);
+  }
+
+  private _addContact(contact: Contact) {
+    const newContact = new Contact(
+      contact._id,
+      contact.name,
+      contact.email,
+      contact.phone
+    );
+    contact._id = this.utilService.makeId();
+    contact = this._setContactsImg([contact]);
+    this._contactsDb.push(newContact);
+    this._contacts$.next(this._contactsDb);
+    this.storageService.saveToStorage(this.CONTACT_KEY, this._contactsDb);
+  }
+
+  _setContactsImg(contacts: Contact[] | any) {
+    //Any is assigned because setting img on _addContact ** fixit **
+    return contacts.map((contact: Contact) => {
       const gender = Math.random() > 0.5 ? 'women' : 'men';
       const num = this.utilService.getRandomInt(1, 50);
       const url = `https://randomuser.me/api/portraits/${gender}/${num}.jpg`;
