@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { StorageService } from 'src/app/services/storage.service';
+import { UtilService } from './util.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,8 @@ import { StorageService } from 'src/app/services/storage.service';
 export class EventService {
   constructor(
     private http: HttpClient,
-    private storageService: StorageService
+    private storageService: StorageService,
+    private utilService: UtilService
   ) {}
 
   private EVENT_KEY: string = 'event_db';
@@ -27,7 +28,7 @@ export class EventService {
     }
     filterdEvents = events;
     if (filter) {
-      filterdEvents = this._filter(events, filter);
+      filterdEvents = this.utilService.filter(events, filter);
     }
     this.storageService.saveToStorage(this.EVENT_KEY, events);
     this._events$.next(filterdEvents);
@@ -43,14 +44,5 @@ export class EventService {
 
   public getEventById(id: string) {
     return this._events$.value.find((event: any) => event.id === id);
-  }
-
-  private _filter(events: any, term: string) {
-    if (!term) return this._events$;
-    term = term.toLocaleLowerCase();
-
-    return events.filter((event: any) => {
-      return event.name.toLocaleLowerCase().includes(term);
-    });
   }
 }

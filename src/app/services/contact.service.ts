@@ -157,13 +157,20 @@ export class ContactService {
   private _contacts$ = new BehaviorSubject<Contact[]>([]);
   public contacts$ = this._contacts$.asObservable();
 
-  public loadContacts(filterBy = ''): void {
+  public loadContacts(filter = ''): void {
     let contacts = this.storageService.loadFromStorage(this.CONTACT_KEY);
+    let filterdContacts;
     if (!contacts?.length || !contacts) {
       contacts = this._setContactsImg(this._contactsDb);
     }
-    this._contacts$.next(contacts);
+    filterdContacts = contacts;
+    if (filter) {
+      filterdContacts = this.utilService.filter(contacts, filter);
+    }
     this.storageService.saveToStorage(this.CONTACT_KEY, contacts);
+    this._contacts$.next(filterdContacts);
+    // this._contacts$.next(contacts);
+    // this.storageService.saveToStorage(this.CONTACT_KEY, filterdContacts);
   }
 
   _setContactsImg(contacts: Contact[]) {

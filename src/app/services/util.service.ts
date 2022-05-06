@@ -20,4 +20,13 @@ export class UtilService {
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min) + min);
   }
+
+  public filter(items: any, term: string) {
+    if (!term) return items;
+    term = term.toLocaleLowerCase();
+
+    return items.filter((item: any) => {
+      return item.name.toLocaleLowerCase().includes(term);
+    });
+  }
 }
