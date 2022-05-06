@@ -15,6 +15,8 @@ import { EventListComponent } from './cmps/event-list/event-list.component';
 import { EventPreviewComponent } from './cmps/event-preview/event-preview.component';
 import { EventDetailsComponent } from './pages/event-details/event-details.component';
 import { FilterComponent } from './cmps/filter/filter.component';
+import { CotactDetailsComponent } from './pages/cotact-details/cotact-details.component';
+import { EditPageComponent } from './pages/edit-page/edit-page.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { FilterComponent } from './cmps/filter/filter.component';
     EventPreviewComponent,
     EventDetailsComponent,
     FilterComponent,
+    CotactDetailsComponent,
+    EditPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

@@ -169,8 +169,14 @@ export class ContactService {
     }
     this.storageService.saveToStorage(this.CONTACT_KEY, contacts);
     this._contacts$.next(filterdContacts);
-    // this._contacts$.next(contacts);
-    // this.storageService.saveToStorage(this.CONTACT_KEY, filterdContacts);
+  }
+
+  public removeContact(id: string) {
+    const contacts = this._contacts$.value.filter(
+      (contact: Contact) => contact._id !== id
+    );
+    this.storageService.saveToStorage(this.CONTACT_KEY, contacts);
+    this._contacts$.next(contacts);
   }
 
   _setContactsImg(contacts: Contact[]) {

@@ -22,4 +22,8 @@ export class ContactPageComponent implements OnInit {
   async loadContacts(filter: string = ''): Promise<void> {
     await this.contactService.loadContacts(filter);
   }
+
+  removeContact(id: string) {
+    this.contactService.removeContact(id);
+  }
 }

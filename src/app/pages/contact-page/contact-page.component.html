@@ -1,2 +1,5 @@
+<router-outlet></router-outlet>
 <filter [isContactPage]="true" (filter)="loadContacts($event)" ></filter>
-<contact-list class="contact-page main-layout"[contacts]="contacts"></contact-list>
+<contact-list (remove)="removeContact($event)" class="contact-page main-layout"[contacts]="contacts"></contact-list>
+
+
