@@ -1,0 +1,20 @@
+.main-filter .search-icon-container {
+  width: 29vw;
+  height: 2.5rem;
+  background-color: #f1f1f1;
+  border-radius: 3px;
+  margin-bottom: 45px;
+  svg {
+    position: relative;
+    top: 4px;
+    left: 9px;
+    color: cadetblue;
+  }
+  input {
+    border: 0;
+    width: 23vw;
+    &:focus-visible {
+      outline: 0;
+    }
+  }
+}
