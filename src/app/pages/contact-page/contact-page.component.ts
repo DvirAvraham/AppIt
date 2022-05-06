@@ -1,22 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import {ContactService} from '../../services/contact.service'
+import { ContactService } from '../../services/contact.service';
+import { Contact } from '../../models/contact.model';
 
 @Component({
   selector: 'contact-page',
   templateUrl: './contact-page.component.html',
-  styleUrls: ['./contact-page.component.scss']
+  styleUrls: ['./contact-page.component.scss'],
 })
 export class ContactPageComponent implements OnInit {
+  constructor(private contactService: ContactService) {}
 
-  constructor(private contactService: ContactService) { }
-
-  // contacts: Contact[] = []
-  contacts: any;
+  contacts!: Contact[];
 
   async ngOnInit(): Promise<void> {
-await this.contactService.loadContacts()
-this.contactService.contacts$.subscribe(contacts => this.contacts = contacts)
-
+    await this.loadContacts();
+    this.contactService.contacts$.subscribe(
+      (contacts) => (this.contacts = contacts)
+    );
   }
 
+  async loadContacts(filter: string = ''): Promise<void> {
+    await this.contactService.loadContacts(filter);
+  }
 }

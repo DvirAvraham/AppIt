@@ -15,13 +15,13 @@ export class HomePageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.loadEvents('');
+    this.subscription = this.eventService.events$.subscribe((res: any) => {
+      this.events$ = res;
+    });
   }
 
   loadEvents(filter: string) {
     this.eventService.loadEvents(filter);
-    this.subscription = this.eventService.events$.subscribe((res: any) => {
-      this.events$ = res;
-    });
   }
 
   ngOnDestroy(): void {

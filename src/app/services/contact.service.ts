@@ -157,7 +157,7 @@ export class ContactService {
   private _contacts$ = new BehaviorSubject<Contact[]>([]);
   public contacts$ = this._contacts$.asObservable();
 
-  public loadContacts(filterBy = null): void {
+  public loadContacts(filterBy = ''): void {
     let contacts = this.storageService.loadFromStorage(this.CONTACT_KEY);
     if (!contacts?.length || !contacts) {
       contacts = this._setContactsImg(this._contactsDb);

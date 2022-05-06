@@ -1,7 +1,11 @@
-<section class="main-filter">
+<section class="main-filter flex space-between">
     <div class="search-icon-container">
       <svg class="sc-hJhJFJ cxRSrn" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" fill-rule="evenodd"><path d="M24 0H0v24h24z"></path><path fill="currentColor" fill-rule="nonzero" d="M18 9.5a8.5 8.5 0 1 0-17 0 8.5 8.5 0 0 0 17 0zm-1.438 6.355l7.292 7.291a.5.5 0 0 1-.708.708l-7.291-7.292a9.5 9.5 0 1 1 .707-.707z"></path></g></svg>
-      <input  [(ngModel)]="filter" (ngModelChange)="onChangeFilter()" type="text" placeholder="  Search for artists, venues, and events ">
+      <input  [(ngModel)]="filter" (ngModelChange)="onChangeFilter()" type="text" placeholder="{{placeHolder}}">
     </div>
-
+    <select *ngIf="!isContactPage" name="categories" id="cars">
+        <option value="sport">Sport</option>
+        <option value="music">Music</option>
+        <option value="comedy">Comedy</option>
+      </select>
 </section>
