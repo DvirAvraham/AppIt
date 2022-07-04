@@ -26,7 +26,6 @@ export class EditPageComponent implements OnInit, OnDestroy {
         ? contact
         : (this.contactService.getEmptyContact() as Contact);
     });
-    console.log(this.contact);
   }
 
   async onSaveContact() {

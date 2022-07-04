@@ -1,1 +1,8 @@
-<p>cotact-details works!!!!!!!!!!!</p>
+<div class="contact-details flex">
+    <img [src]="contact.img" alt="" class="user-img"/>
+    <section class="info">
+        <div class="contact-name"> {{ contact.name }}</div>
+        <div>Phone: {{ contact.phone }}</div>
+        <div>Email: {{ contact.email }}</div>
+    </section>
+  </div>
