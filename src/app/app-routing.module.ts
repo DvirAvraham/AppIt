@@ -22,11 +22,6 @@ const routes: Routes = [
         component: EditPageComponent,
         resolve: { contact: ContactResolverService },
       },
-      {
-        path: 'contact/:id',
-        component: CotactDetailsComponent,
-        resolve: { contact: ContactResolverService },
-      },
     ],
   },
   {
@@ -39,6 +34,11 @@ const routes: Routes = [
         resolve: { contact: ContactResolverService },
       },
     ],
+  },
+  {
+    path: 'contact/:id',
+    component: CotactDetailsComponent,
+    resolve: { contact: ContactResolverService },
   },
 ];
 
